@@ -1,0 +1,98 @@
+import java.util.Scanner;
+class MaxInputExc extends Exception{
+    @Override
+    public String toString(){
+        return "Can not enter numbers greater than 200000";
+    }
+}
+
+class InvalidInputExc extends Exception{
+    @Override
+    public String toString(){
+        return "Invalid operators";
+    }
+
+}
+class MaxMultiplier extends Exception{
+    @Override
+    public String toString(){
+        return "Max multiplier limit exceeded";
+    }
+}
+class cal{
+     public int result(int a, int b){
+         return a+b;
+     }
+
+     public float mulp(int a, int b){
+         return a*b;
+     }
+
+     public float divi(int a, int b){
+         return a/b;
+     }
+
+     public int subs(int a, int b){
+         return a-b;
+     }
+
+}
+class custom_calculator{
+    public static void main(String[] args) {
+        cal c = new cal();
+    Scanner sc = new Scanner(System.in);
+    int a = sc.nextInt();
+    char op = sc.next().charAt(0);
+    int b = sc.nextInt();
+    if(a>200000 || b>200000){
+        try {
+            throw new MaxInputExc();
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
+
+    else if(op != '+' && op != '-' && op != '*' && op!= '/'){
+        try{
+            throw new InvalidInputExc();
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    else if(op == '*' && (a>7000 || b>7000)){
+        try{
+            throw new MaxMultiplier();
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+    }
+    else if(op == '/' && b == 0){
+        try{
+            throw new ArithmeticException("Cannot be divided by 0");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    else{
+        switch (op){
+            case '+':
+                System.out.println(c.result(a , b));
+                break;
+            case '*':
+                System.out.println(c.mulp(a , b));
+                break;
+            case '-':
+                System.out.println(c.subs(a , b));
+                break;
+            case '/':
+                System.out.println(c.divi(a , b));
+                break;
+        }
+    }
+
+    }
+}
